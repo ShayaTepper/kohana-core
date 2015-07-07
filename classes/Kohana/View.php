@@ -243,9 +243,15 @@ class Kohana_View {
 			 * We use this method here because it's impossible to throw an
 			 * exception from __toString().
 			 */
-			$error_response = Kohana_Exception::_handler($e);
+            if (isset(Kohana::$exception_handler) && is_callable(Kohana::$exception_handler)) {
+                $error_response = call_user_func(Kohana::$exception_handler, $e);
 
-			return $error_response->body();
+                return $error_response ?: '';
+            } else {
+                $error_response = Kohana_Exception::_handler($e);
+
+                return $error_response->body();
+            }
 		}
 	}
 

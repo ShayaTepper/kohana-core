@@ -111,7 +111,13 @@ class Kohana_Core {
 	 */
 	public static $shutdown_errors = array(E_PARSE, E_ERROR, E_USER_ERROR);
 
-	/**
+
+    /**
+     * @var  Callable  Pass an exception handler
+     */
+    public static $exception_handler;
+
+    /**
 	 * @var  boolean  set the X-Powered-By header
 	 */
 	public static $expose = FALSE;
